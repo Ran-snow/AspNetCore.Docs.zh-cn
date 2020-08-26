@@ -52,10 +52,10 @@ Blazor WebAssembly 中的身份验证支持建立在 `oidc-client.js` 库的基�
 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) 库提供几个基元，用于使用 OIDC 实现身份验证和授权。 从广义上说来，身份验证的原理如下：
 
 * 当匿名用户选择登录按钮或请求应用了 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 特性的页面时，会将其重定向到应用的登录页 (`/authentication/login`)。
-* 在登录页上，身份验证库准备重定向到授权终结点。 授权终结点在 Blazor WebAssembly 应用之外，可以托管在单独的原点上。 该终结点负责确定用户是否通过身份验证，并发送一个或更多令牌作为响应。 身份验证库提供登录回叫以接收身份验证响应。
+* 在登录页上，身份验证库准备重定向到授权终结点。 授权终结点在 Blazor WebAssembly 应用之外，可以托管在单独的原点上。 该终结点负责确定用户是否通过身份验证，并发送一个或更多令牌作为响应。 身份验证库提供登录回调以接收身份验证响应。
   * 如果用户未通过身份验证，则会被重定向到底层身份验证系统，通常是 ASP.NET Core Identity。
-  * 如果用户已通过身份验证，则授权终结点会生成相应的令牌，并将浏览器重定向回登录回叫终结点 (`/authentication/login-callback`)。
-* 当 Blazor WebAssembly 应用加载登录回叫终结点 (`/authentication/login-callback`) 时，就处理了身份验证响应。
+  * 如果用户已通过身份验证，则授权终结点会生成相应的令牌，并将浏览器重定向回登录回调终结点 (`/authentication/login-callback`)。
+* 当 Blazor WebAssembly 应用加载登录回调终结点 (`/authentication/login-callback`) 时，就处理了身份验证响应。
   * 如果身份验证进程成功完成，则用户通过身份验证，可以选择返回该用户请求的原受保护 URL。
   * 如果身份验证进程由于任何原因而失败，会将用户导向登录失败页 (`/authentication/login-failed`)，并显示错误。
 
